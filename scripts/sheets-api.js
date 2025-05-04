@@ -6,23 +6,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzEoFKxq1Dzv6Y74KaUVeXKpULUny_2ypvPpKJsis9xG2P-cOIeTiHE-FPxqS0O_v64PQ/exec";
+
 async function loadUserScripts() {
-    // Simulação - na implementação real, isso vai buscar no Google Sheets
-    const scriptSelector = document.getElementById('scriptSelector');
-    
-    // Exemplo de scripts - substituir por chamada real à API
-    const exampleScripts = [
-        { id: '1', name: 'Estratégia Básica de Futebol' },
-        { id: '2', name: 'Sistema de Martingale (Risco)' },
-        { id: '3', name: 'Green Book Tenis' }
-    ];
-    
-    exampleScripts.forEach(script => {
-        const option = document.createElement('option');
-        option.value = script.id;
-        option.textContent = script.name;
-        scriptSelector.appendChild(option);
-    });
+    try {
+        const response = await fetch(SHEETS_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                action: 'get_scripts',
+                sheet: 'Scripts'
+            })
+        });
+        
+        const data = await response.json();
+        const scriptSelector = document.getElementById('scriptSelector');
+        
+        data.scripts.forEach(script => {
+            const option = document.createElement('option');
+            option.value = script.id;
+            option.textContent = script.name;
+            scriptSelector.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar scripts:', error);
+    }
 }
 
 function setupControlButtons() {
