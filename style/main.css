@@ -77,7 +77,7 @@ header {
     transform: translateY(-5px);
 }
 
-/* Bot√µes */
+/* Botıes */
 .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 6px;
@@ -110,7 +110,7 @@ header {
     box-shadow: 0 0 15px rgba(255, 58, 58, 0.3);
 }
 
-/* Formul√°rios */
+/* Formul·rios */
 .input-group {
     margin-bottom: 1.5rem;
 }
@@ -162,7 +162,7 @@ header {
     background: linear-gradient(90deg, transparent, var(--primary), transparent);
 }
 
-/* Anima√ß√µes */
+/* AnimaÁıes */
 @keyframes pulse {
     0% { opacity: 0.6; }
     50% { opacity: 1; }
