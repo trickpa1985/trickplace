@@ -89,3 +89,188 @@ header button {
         grid-template-columns: 1fr;
     }
 }
+:root {
+    --primary: #00ff88;
+    --primary-dark: #00cc6a;
+    --secondary: #0084ff;
+    --dark-bg: #0a0a0f;
+    --darker-bg: #050508;
+    --card-bg: #151520;
+    --text: #e0e0e0;
+    --text-muted: #a0a0a0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* Background animado com mapa mundi */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+PHBhdGggZD0iTTUwMCwxMDBjMTY1LDAsMzAwLDYwLDMwMCwxMzBzLTEzNSwxMzAtMzAwLDEzMHMtMzAwLTYwLTMwMC0xMzBTMzM1LDEwMCw1MDAsMTAweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDAsMjU1LDEzNiwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+');
+    background-size: 120%;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -1;
+    animation: bgPan 120s linear infinite;
+}
+
+@keyframes bgPan {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Container principal */
+.login-container, .dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header moderno */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, var(--darker-bg) 0%, rgba(0,136,255,0.1) 100%);
+    border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--primary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Botões */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.btn-danger {
+    background: #ff3a3a;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #ff1a1a;
+    box-shadow: 0 0 15px rgba(255, 58, 58, 0.3);
+}
+
+/* Formulários */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+/* Grid do dashboard */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Efeitos hi-tech */
+.hi-tech-border {
+    position: relative;
+}
+
+.hi-tech-border::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+/* Animações */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    body::before {
+        background-size: 200%;
+    }
+}
