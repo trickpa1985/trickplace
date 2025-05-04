@@ -2,49 +2,106 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Bet Automation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Bet Automation</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Painel de Controle</h1>
-        <button id="logout">Sair</button>
+        <div style="display: flex; align-items: center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
+                <path d="M12 2L3 7L12 12L21 7L12 2Z" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 12L12 17L21 12" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 17L12 22L21 17" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2 style="margin: 0; font-weight: 600;">BET AUTOMATION</h2>
+        </div>
+        <button id="logout" class="btn" style="background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.1);">
+            Sair
+        </button>
     </header>
     
-    <div class="dashboard-grid">
-        <section class="script-control">
-            <h2>Controle de Scripts</h2>
-            <select id="scriptSelector">
-                <option value="">Selecione um script...</option>
-                <!-- Opções serão preenchidas via JavaScript -->
-            </select>
-            <div class="action-buttons">
-                <button id="startScript" class="big-button start">START</button>
-                <button id="stopScript" class="big-button stop">STOP</button>
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
+            <!-- Card de Controle -->
+            <div class="card">
+                <h3 style="margin-top: 0; color: var(--primary);">CONTROLE DE EXECUÇÃO</h3>
+                <div class="input-group">
+                    <label for="scriptSelector">Selecione a Estratégia</label>
+                    <select id="scriptSelector">
+                        <option value="">-- Selecione --</option>
+                        <option value="1">Estratégia Básica de Futebol</option>
+                        <option value="2">Sistema de Martingale</option>
+                        <option value="3">Green Book Tênis</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button id="startScript" class="btn btn-primary" style="flex: 1;">
+                        INICIAR
+                    </button>
+                    <button id="stopScript" class="btn btn-danger" style="flex: 1;">
+                        PARAR
+                    </button>
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                        <span id="activeScript" style="color: var(--primary);">Nenhum script em execução</span>
+                    </p>
+                </div>
             </div>
-        </section>
-        
-        <section class="account-info">
-            <h2>Informações da Conta</h2>
-            <div id="balanceDisplay">Saldo: R$ --</div>
-            <div id="activeScript">Script ativo: Nenhum</div>
-        </section>
-        <!-- Adicionar após a seção de account-info -->
-<section class="execution-history">
-    <h2>Últimas Execuções</h2>
-    <table id="executionTable">
-        <thead>
-            <tr>
-                <th>Script</th>
-                <th>Status</th>
-                <th>Data/Hora</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Preenchido via JavaScript -->
-        </tbody>
-    </table>
-</section>
+            
+            <!-- Card de Status -->
+            <div class="card">
+                <h3 style="margin-top: 0; color: var(--secondary);">STATUS DO SISTEMA</h3>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <span style="color: var(--text-muted);">Saldo Disponível:</span>
+                    <span id="balanceDisplay" style="font-weight: 600;">R$ 0,00</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <span style="color: var(--text-muted);">Máquinas Ativas:</span>
+                    <span style="color: var(--primary); font-weight: 600;">10/10</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted);">Última Atualização:</span>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">há 2 minutos</span>
+                </div>
+                
+                <div style="margin-top: 1.5rem; background: rgba(0,132,255,0.1); padding: 0.75rem; border-radius: 6px; border-left: 3px solid var(--secondary);">
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text);">
+                        Sistema operando com <span style="color: var(--primary);">100% de estabilidade</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Card de Histórico -->
+            <div class="card">
+                <h3 style="margin-top: 0;">HISTÓRICO RECENTE</h3>
+                <table id="executionTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <th style="text-align: left; padding: 0.5rem 0; font-size: 0.8rem; color: var(--text-muted);">Script</th>
+                            <th style="text-align: left; padding: 0.5rem 0; font-size: 0.8rem; color: var(--text-muted);">Status</th>
+                            <th style="text-align: right; padding: 0.5rem 0; font-size: 0.8rem; color: var(--text-muted);">Data/Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Preenchido via JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button class="btn" style="background: transparent; color: var(--secondary); border: 1px solid rgba(0,132,255,0.3); font-size: 0.8rem;">
+                        VER HISTÓRICO COMPLETO
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script src="scripts/auth.js"></script>
