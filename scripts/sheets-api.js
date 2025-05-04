@@ -1,4 +1,4 @@
-// Configuração para conectar com Google Sheets
+// ConfiguraÃ§Ã£o para conectar com Google Sheets
 document.addEventListener('DOMContentLoaded', () => {
     if(window.location.pathname.includes('dashboard.html')) {
         loadUserScripts();
@@ -46,14 +46,30 @@ function setupControlButtons() {
             return;
         }
         
-        // Simulação - na implementação real, chamará o Google Apps Script
-        alert(`Script ${scriptId} iniciado! (Simulação)`);
+        // SimulaÃ§Ã£o - na implementaÃ§Ã£o real, chamarÃ¡ o Google Apps Script
+        alert(`Script ${scriptId} iniciado! (SimulaÃ§Ã£o)`);
         document.getElementById('activeScript').textContent = `Script ativo: ${document.getElementById('scriptSelector').options[document.getElementById('scriptSelector').selectedIndex].text}`;
     });
     
     stopBtn.addEventListener('click', async () => {
-        // Simulação - na implementação real, chamará o Google Apps Script
-        alert('STOP acionado! (Simulação)');
+        // SimulaÃ§Ã£o - na implementaÃ§Ã£o real, chamarÃ¡ o Google Apps Script
+        alert('STOP acionado! (SimulaÃ§Ã£o)');
         document.getElementById('activeScript').textContent = 'Script ativo: Nenhum';
     });
 }
+// Adicionar verificaÃ§Ã£o periÃ³dica de status
+setInterval(async () => {
+    const response = await fetch(SHEETS_API_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            action: 'check_status',
+            user_email: localStorage.getItem('userEmail')
+        })
+    });
+    
+    const data = await response.json();
+    if(data.active_script) {
+        document.getElementById('activeScript').textContent = 
+            `Script ativo: ${data.script_name}`;
+    }
+}, 30000); // A cada 30 segundos
