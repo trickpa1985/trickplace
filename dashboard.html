@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Bet Automation</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Painel de Controle</h1>
+        <button id="logout">Sair</button>
+    </header>
+    
+    <div class="dashboard-grid">
+        <section class="script-control">
+            <h2>Controle de Scripts</h2>
+            <select id="scriptSelector">
+                <option value="">Selecione um script...</option>
+                <!-- Opções serão preenchidas via JavaScript -->
+            </select>
+            <div class="action-buttons">
+                <button id="startScript" class="big-button start">START</button>
+                <button id="stopScript" class="big-button stop">STOP</button>
+            </div>
+        </section>
+        
+        <section class="account-info">
+            <h2>Informações da Conta</h2>
+            <div id="balanceDisplay">Saldo: R$ --</div>
+            <div id="activeScript">Script ativo: Nenhum</div>
+        </section>
+    </div>
+    
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/sheets-api.js"></script>
+</body>
+</html>
